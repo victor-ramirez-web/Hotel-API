@@ -1,0 +1,112 @@
+body {
+  /*background: #20262E;*/
+  background: #9b9b9b;
+  padding: 10px;
+  font-family: Helvetica;
+  /*filter: blur(5px);*/
+}
+
+div#main-container {
+  display:block; 
+  width:50%;
+  min-width: 446px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#banner-message {
+  background: #fff;
+  border-radius: 2px;
+  padding: 15px 14px 15px 14px;
+  font-size: 14px;
+  text-align: center;
+  transition: all 0.2s;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#results {
+  background: #fff;
+  border-radius: 2px;
+  padding: 15px 14px 15px 14px;
+  font-size: 18px;
+  text-align: center;
+  transition: all 0.2s;
+  margin: 5px auto 5px auto;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+button {
+  background: #bf0000;
+  border: none;
+  border-radius: 2px;
+  padding: 8px 14px;
+  font-size: 12px;
+  color: #fff;
+}
+
+div#results div[data-id="hotel-detail"] {
+  /**/
+  animation: animateElement linear .3s;
+  animation-iteration-count: 1;
+  /**/
+  line-height:15px;
+  background: #efefef;
+  border: none;
+  border-radius: 2px;
+  padding: 8px 14px;
+  margin: 3px auto 3px auto;
+  transition: all 0.2s;
+  font-size: 10px;
+  color: #000;
+  clear:both;
+  height:50px;
+}
+
+div#results div[data-id="hotel-detail"] img {
+  height:50px;
+  width:50px;
+  float:right;
+}
+
+div[data-id="hotel-info"], div[data-id="hotel-thumbnail"] {
+   display: block;
+}
+
+div[data-id="hotel-info"]{
+   width: 65%;
+   float:left;
+   text-align:justify;
+}
+
+div[data-id="hotel-thumbnail"]{
+   width: 35%;
+   float:right;
+}
+
+#banner-message.alt {
+  background: #0084ff;
+  color: #fff;
+  margin-top: 40px;
+  width: 200px;
+}
+
+#banner-message.alt button {
+  background: #fff;
+  color: #000;
+}
+
+button.bt-clear {
+  background: silver;
+}
+
+@keyframes animateElement{
+  0% {
+    opacity:0;
+    transform:  translate(0px,5px);
+  }
+  100% {
+    opacity:1;
+    transform:  translate(0px,0px);
+  }
+}

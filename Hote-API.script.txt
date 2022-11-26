@@ -1,0 +1,95 @@
+var banner = $("#banner-message"),
+    results = $("div#results"),
+    row = $("div[data-id='hotel-detail']"),
+    button = $("button");
+    
+// Hide the detail
+row.hide();
+
+function getHotelList(){
+    //let _url = "https://app.rakuten.co.jp/services/api/Travel/SimpleHotelSearch/20170426?",
+    let _url = "https://97e889af-40d0-4eb0-ab53-21c54f4d856a.mock.pstmn.io/services/api/Travel/SimpleHotelSearch/20170426?",  
+        _params = [
+          "format=json",
+          "largeClassCode=japan",
+          "middleClassCode=akita",
+          "smallClassCode=tazawa",
+          "applicationId=1076105647355677383",
+          "developerId=1076105647355677383"
+        ];
+
+    $.getJSON(_url + _params.join('&'), function(data){
+
+      if(data.hotels){
+        _.each(data.hotels, function(hotelRow, hotelIndex){
+          
+          let _new_row = $(row).clone();
+          _new_row.attr('id', "hotel-detail-" + hotelRow.hotel[0].hotelBasicInfo.hotelNo)
+                  .attr('title', '');
+                    
+          // Hotel title
+          _new_row.find('div[data-id="hotel-name"]')
+                        .text(hotelRow.hotel[0].hotelBasicInfo.hotelName);  
+          // Website            
+          let _hotel_url = hotelRow.hotel[0].hotelBasicInfo.hotelInformationUrl,
+              _link = $("<a target='_blank'>");
+          _link.attr("href", _hotel_url)
+               .text("More details");
+               
+          _new_row.find('div[data-id="hotel-website"]')
+                        .append(_link); 
+          _new_row.find('div[data-id="hotel-phone"]')
+                        .text(hotelRow.hotel[0].hotelBasicInfo.telephoneNo); 
+                        
+          // attach thumbnail
+          let _thumb = $("<img />");
+          _thumb.attr('src', hotelRow.hotel[0].hotelBasicInfo.hotelThumbnailUrl);
+          _new_row.find('div[data-id="hotel-thumbnail"]')
+                  .append(_thumb);
+          
+          _new_row.appendTo(results).show();
+          
+          /*
+          _new_row.appendTo(results).show({
+              easing:'swing',
+              duration: 300,
+              queue: true
+           });
+           */
+        });
+      }
+
+    }); 
+}
+
+$('button.bt-get').on("click", function(evt){
+    if(evt){
+        evt.preventDefault();
+    }
+
+    getHotelList();
+});
+
+$('button.bt-clear').on("click", function(evt){
+    if(evt){
+        evt.preventDefault();
+    }
+  
+    
+    //$('div#results').empty();
+    /**/
+    $.each($('div#results div[data-id="hotel-detail"]'), function(key, val){
+        //$(val).remove();
+        /**/
+        $(val).animate({opacity: '0'}, 500, function(){
+          /**/
+            $(val).animate({height: '0px'}, 300, function(){
+              $(val).remove();
+            });
+          /**/
+          //$(val).remove();
+        });
+        /**/
+    });
+    /**/
+});
